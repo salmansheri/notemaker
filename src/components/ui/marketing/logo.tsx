@@ -10,8 +10,21 @@ const font = Poppins({
 
 const Logo = () => {
   return (
-    <div className="hidden md:flex items-center gap-x-2">
-      <Image src="/images/logo.svg" alt="logo" height={40} width={40} />
+    <div className="hidden md:flex items-center gap-x-2 ">
+      <Image
+        src="/images/logo.svg"
+        alt="logo"
+        height={40}
+        width={40}
+        className="dark:hidden"
+      />
+      <Image
+        src="/images/logo-dark.svg"
+        alt="logo"
+        height={40}
+        width={40}
+        className="hidden dark:block"
+      />
 
       <p className={cn("font-semibold", font.className)}>Note Maker</p>
     </div>
