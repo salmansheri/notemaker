@@ -31,14 +31,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ConvexProvider>
+    <ConvexProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={inter.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
           </ThemeProvider>
-        </ConvexProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ConvexProvider>
   );
 }

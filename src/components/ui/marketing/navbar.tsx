@@ -6,13 +6,17 @@ import React from "react";
 import Logo from "./logo";
 import { ModeToggle } from "../mode-toggle";
 import { useConvexAuth } from "convex/react";
-import { SignInButton } from "@clerk/clerk-react";
-import { Button } from "../button";
+import { SignInButton, UserButton } from "@clerk/clerk-react";
+import { Button, buttonVariants } from "../button";
 import Spinner from "../spinner/spinner";
+import Link from "next/link";
+import { useUser } from "@clerk/clerk-react";
 
 const Navbar = () => {
-  const { isAuthenticated, isLoading } = useConvexAuth();
+  const { isLoading } = useConvexAuth();
   const scrolled = useScrollTop();
+
+  const { isSignedIn } = useUser();
 
   return (
     <div
@@ -28,7 +32,7 @@ const Navbar = () => {
             <Spinner />
           </p>
         )}
-        {!isAuthenticated && !isLoading && (
+        {!isSignedIn && !isLoading && (
           <>
             <SignInButton mode="modal">
               <Button variant="ghost">Login</Button>
@@ -36,6 +40,22 @@ const Navbar = () => {
             <SignInButton mode="modal">
               <Button>Get NoteMaker Free</Button>
             </SignInButton>
+          </>
+        )}
+        {isSignedIn && !isLoading && (
+          <>
+            <Link
+              className={cn(
+                buttonVariants({
+                  variant: "ghost",
+                  size: "sm",
+                })
+              )}
+              href="/documents"
+            >
+              Enter Notemaker
+            </Link>
+            <UserButton afterSignOutUrl="/" />
           </>
         )}
         <ModeToggle />
